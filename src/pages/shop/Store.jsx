@@ -4,7 +4,6 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Store = () => {
   const [stores, setStores] = useState([]);
-  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     const getStoresData = async () => {
@@ -22,7 +21,7 @@ const Store = () => {
     };
 
     getStoresData(); // <-- Ensure that the function is called here
-  }, [axiosSecure]);
+  }, []);
 
   return (
     <div>
