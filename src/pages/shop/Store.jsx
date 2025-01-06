@@ -9,9 +9,7 @@ const Store = () => {
   useEffect(() => {
     const getStoresData = async () => {
       try {
-        const response = await axiosSecure(
-          "https://mega-mart-server.onrender.com/stores"
-        );
+        const response = await axiosSecure("/stores");
         console.log("Stores fetched successfully:", response.data);
         setStores(response.data);
       } catch (error) {
@@ -27,9 +25,7 @@ const Store = () => {
     <div>
       <h1>Store Filter Section</h1>
       {stores.length > 0 ? (
-        stores.map((store, index) => (
-          <StoreCard key={index} store={store} />
-        ))
+        stores.map((store, index) => <StoreCard key={index} store={store} />)
       ) : (
         <p>No stores available.</p>
       )}
