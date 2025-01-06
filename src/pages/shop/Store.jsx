@@ -19,14 +19,20 @@ const Store = () => {
         // Optionally, show an alert or display a fallback message
       }
     };
-  }, []);
+
+    getStoresData(); // <-- Ensure that the function is called here
+  }, [axiosSecure]);
 
   return (
     <div>
       <h1>Store Filter Section</h1>
-      {stores.map((store, index) => (
-        <StoreCard key={index} store={store} />
-      ))}
+      {stores.length > 0 ? (
+        stores.map((store, index) => (
+          <StoreCard key={index} store={store} />
+        ))
+      ) : (
+        <p>No stores available.</p>
+      )}
     </div>
   );
 };
