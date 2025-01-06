@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import StoreCard from "../../components/StoreCard";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Store = () => {
   const [stores, setStores] = useState([]);
+  const axiosSecure = useAxiosSecure()
 
   useEffect(() => {
     const getStoresData = async () => {
-      const response = await fetch("https://mega-mart-server.onrender.com/stores");
+      const response = await axiosSecure("https://mega-mart-server.onrender.com/stores");
       const data = await response.json();
       console.log(data);
       setStores(data)
