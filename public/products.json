@@ -1,0 +1,163 @@
+[
+    {
+      "_id": 1,
+      "name": "Wireless Earbuds",
+      "category": "Electronics",
+      "price": 99.99,
+      "image": "", 
+      "description": "High-quality wireless earbuds with noise cancellation and 10 hours of battery life."
+    },
+    {
+      "_id": 2,
+      "name": "Leather Jacket",
+      "category": "Fashion",
+      "price": 149.99,
+      "image": "",
+      "description": "Stylish leather jacket perfect for all seasons."
+    },
+    {
+      "_id": 3,
+      "name": "Gaming Laptop",
+      "category": "Electronics",
+      "price": 1299.99,
+      "image": "",
+      "description": "High-performance gaming laptop with a 16GB RAM and a 512GB SSD."
+    },
+    {
+      "_id": 4,
+      "name": "Smartphone",
+      "category": "Electronics",
+      "price": 799.99,
+      "image": "",
+      "description": "Latest smartphone with a 5G connection, 128GB storage, and a stunning display."
+    },
+    {
+      "_id": 5,
+      "name": "Stylish Sneakers",
+      "category": "Fashion",
+      "price": 59.99,
+      "image": "",
+      "description": "Comfortable and stylish sneakers for daily wear."
+    },
+    {
+      "_id": 6,
+      "name": "Fitness Tracker",
+      "category": "Accessories",
+      "price": 49.99,
+      "image": "",
+      "description": "Track your daily activity, heart rate, and sleep with this fitness tracker."
+    },
+    {
+      "_id": 7,
+      "name": "Coffee Maker",
+      "category": "Home Appliances",
+      "price": 89.99,
+      "image": "",
+      "description": "Automatic coffee maker with programmable settings and easy cleanup."
+    },
+    {
+      "_id": 8,
+      "name": "Designer Watch",
+      "category": "Accessories",
+      "price": 299.99,
+      "image": "",
+      "description": "Elegant designer watch with a stainless steel band and a classic dial."
+    },
+    {
+      "_id": 9,
+      "name": "Bluetooth Speaker",
+      "category": "Electronics",
+      "price": 59.99,
+      "image": "",
+      "description": "Portable Bluetooth speaker with high-quality sound and a long battery life."
+    },
+    {
+      "_id": 10,
+      "name": "Smart Thermostat",
+      "category": "Home Appliances",
+      "price": 129.99,
+      "image": "",
+      "description": "Smart thermostat to control your home temperature remotely via your phone."
+    },
+    {
+      "_id": 11,
+      "name": "Wireless Earbuds",
+      "category": "Electronics",
+      "price": 99.99,
+      "image": "", 
+      "description": "High-quality wireless earbuds with noise cancellation and 10 hours of battery life."
+    },
+    {
+      "_id": 12,
+      "name": "Leather Jacket",
+      "category": "Fashion",
+      "price": 149.99,
+      "image": "",
+      "description": "Stylish leather jacket perfect for all seasons."
+    },
+    {
+      "_id": 13,
+      "name": "Gaming Laptop",
+      "category": "Electronics",
+      "price": 1299.99,
+      "image": "",
+      "description": "High-performance gaming laptop with a 16GB RAM and a 512GB SSD."
+    },
+    {
+      "_id": 14,
+      "name": "Smartphone",
+      "category": "Electronics",
+      "price": 799.99,
+      "image": "",
+      "description": "Latest smartphone with a 5G connection, 128GB storage, and a stunning display."
+    },
+    {
+      "_id": 15,
+      "name": "Stylish Sneakers",
+      "category": "Fashion",
+      "price": 59.99,
+      "image": "",
+      "description": "Comfortable and stylish sneakers for daily wear."
+    },
+    {
+      "_id": 16,
+      "name": "Fitness Tracker",
+      "category": "Accessories",
+      "price": 49.99,
+      "image": "",
+      "description": "Track your daily activity, heart rate, and sleep with this fitness tracker."
+    },
+    {
+      "_id": 17,
+      "name": "Coffee Maker",
+      "category": "Home Appliances",
+      "price": 89.99,
+      "image": "",
+      "description": "Automatic coffee maker with programmable settings and easy cleanup."
+    },
+    {
+      "_id": 18,
+      "name": "Designer Watch",
+      "category": "Accessories",
+      "price": 299.99,
+      "image": "",
+      "description": "Elegant designer watch with a stainless steel band and a classic dial."
+    },
+    {
+      "_id": 19,
+      "name": "Bluetooth Speaker",
+      "category": "Electronics",
+      "price": 59.99,
+      "image": "",
+      "description": "Portable Bluetooth speaker with high-quality sound and a long battery life."
+    },
+    {
+      "_id": 20,
+      "name": "Smart Thermostat",
+      "category": "Home Appliances",
+      "price": 129.99,
+      "image": "",
+      "description": "Smart thermostat to control your home temperature remotely via your phone."
+    }
+  ]
+  
