@@ -9,9 +9,12 @@ const Store = () => {
   useEffect(() => {
     const getStoresData = async () => {
       try {
-        const response = await axiosSecure("/stores");
-        console.log("Stores fetched successfully:", response.data);
-        setStores(response.data);
+        // const response = await axiosSecure("/stores");
+        // console.log("Stores fetched successfully:", response.data);
+        // setStores(response.data);
+        const response = await fetch("https://mega-mart-server.onrender.com/stores")
+        const data = await response.json()
+        setStores(data)
       } catch (error) {
         console.error("Failed to fetch stores data:", error);
         // Optionally, show an alert or display a fallback message
