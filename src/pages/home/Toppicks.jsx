@@ -12,7 +12,7 @@ const Toppicks = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("http://localhost:6001/products");
+      const response = await fetch("https://mega-mart-server.onrender.com/products");
       const data = await response.json();
       setProducts(data);
     };

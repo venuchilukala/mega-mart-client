@@ -20,7 +20,7 @@ const CartPage = () => {
       const productDetails = await Promise.all(
         cart.products.map(async (item) => {
           const res = await fetch(
-            `http://localhost:6001/products/${item.product}`
+            `https://mega-mart-server.onrender.com/products/${item.product}`
           );
           const productData = await res.json();
           return {
@@ -58,7 +58,7 @@ const CartPage = () => {
       console.log("Clicked prod", updatedQty);
 
       // Send the request to update the quantity in the cart
-      const response = await fetch(`http://localhost:6001/carts`, {
+      const response = await fetch(`https://mega-mart-server.onrender.com/carts`, {
         method: "POST", // or "PUT" depending on your approach
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -97,7 +97,7 @@ const CartPage = () => {
       console.log("Clicked prod to decrease", updatedQty);
 
       // Send the request to update the quantity in the cart
-      const response = await fetch(`http://localhost:6001/carts`, {
+      const response = await fetch(`https://mega-mart-server.onrender.com/carts`, {
         method: "POST", // or "PUT" depending on your approach
         headers: {
           "Content-Type": "application/json; charset=UTF-8",
@@ -139,7 +139,7 @@ const CartPage = () => {
       if (result.isConfirmed) {
         try {
           const res = await fetch(
-            `http://localhost:6001/carts/${item._id}?email=${user?.email}`,
+            `https://mega-mart-server.onrender.com/carts/${item._id}?email=${user?.email}`,
             {
               method: "DELETE",
             }
@@ -179,7 +179,7 @@ const CartPage = () => {
       };
       console.log(body);
       const response = await fetch(
-        "http://localhost:6001/create-checkout-session",
+        "https://mega-mart-server.onrender.com/create-checkout-session",
         {
           method: "POST",
           headers: {
@@ -205,7 +205,7 @@ const CartPage = () => {
         if (paymentStatus === "success") {
           // Clear the cart after successful payment
           const clearCartResponse = await fetch(
-            `http://localhost:6001/carts/clear-cart`,
+            `https://mega-mart-server.onrender.com/carts/clear-cart`,
             {
               method: "DELETE",
             }

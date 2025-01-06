@@ -57,7 +57,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setUser(currentUser);
         const userInfo = {email : currentUser.email}
-        axios.post('http://localhost:6001/jwt', userInfo).then((response)=> {
+        axios.post('https://mega-mart-server.onrender.com/jwt', userInfo).then((response)=> {
           // console.log(response.data.jwt_token)
           if(response.data.jwt_token){
             localStorage.setItem("jwt-token", response.data.jwt_token)

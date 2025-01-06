@@ -90,7 +90,7 @@ const router = createBrowserRouter([
         path: "update-product/:id",
         element: <UpdateProduct />,
         loader: ({ params }) =>
-          fetch(`http://localhost:6001/products/${params.id}`),
+          fetch(`https://mega-mart-server.onrender.com/products/${params.id}`),
       },
     ],
   },

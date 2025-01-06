@@ -32,7 +32,7 @@ const Modal = () => {
           name: data.email,
           email: data.email,
         };
-        axios.post("http://localhost:6001/users", userInfo).then((response) => {
+        axios.post("https://mega-mart-server.onrender.com/users", userInfo).then((response) => {
           alert("Login successful!");
           document.getElementById("my_modal_5").close();
           navigate(from , {replace : true});
@@ -52,7 +52,7 @@ const Modal = () => {
           name: result?.user?.displayName,
           email: result?.user?.email,
         };
-        axios.post("http://localhost:6001/users", userInfo).then(() => {
+        axios.post("https://mega-mart-server.onrender.com/users", userInfo).then(() => {
           alert("Login done Successfully");
           navigate("/");
           document.getElementById("my_modal_5").close();

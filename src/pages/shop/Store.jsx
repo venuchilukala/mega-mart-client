@@ -6,7 +6,7 @@ const Store = () => {
 
   useEffect(() => {
     const getStoresData = async () => {
-      const response = await fetch("http://localhost:6001/stores");
+      const response = await fetch("https://mega-mart-server.onrender.com/stores");
       const data = await response.json();
       console.log(data);
       setStores(data)

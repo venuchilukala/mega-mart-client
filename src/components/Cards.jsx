@@ -21,7 +21,7 @@ const Cards = (props) => {
     setFavourite(!isFavourite);
   };
 
-  // http://localhost:6001/carts
+  // https://mega-mart-server.onrender.com/carts
   // {
   //   "productId": "6777e2411de6b0da106d1a37", 
   //   "quantity": 1, 
@@ -37,7 +37,7 @@ const Cards = (props) => {
       };
 
       console.log(cartItem)
-      fetch("http://localhost:6001/carts", {
+      fetch("https://mega-mart-server.onrender.com/carts", {
         method: "POST",
         headers: {
           "content-type": "application/json",

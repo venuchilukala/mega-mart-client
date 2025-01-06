@@ -14,13 +14,13 @@ const StoreItems = () => {
     const fetchStoreAndProducts = async () => {
       try {
         // Fetch the store by its ID
-        const storeResponse = await fetch(`http://localhost:6001/stores/${id}`);
+        const storeResponse = await fetch(`https://mega-mart-server.onrender.com/stores/${id}`);
         const storeData = await storeResponse.json();
         setStore(storeData);
 
         // Fetch all products by their IDs
         const productPromises = storeData.products.map((productId) =>
-          fetch(`http://localhost:6001/products/${productId}`).then((res) =>
+          fetch(`https://mega-mart-server.onrender.com/products/${productId}`).then((res) =>
             res.json()
           )
         );
