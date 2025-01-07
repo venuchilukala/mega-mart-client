@@ -30,7 +30,6 @@ const AddProduct = () => {
 
 
   const onSubmit = async (data) => {
-    console.log(data);
 
     // Store validation
     const isValidStore = stores.some((store) => store._id === data.storeId);
@@ -51,7 +50,7 @@ const AddProduct = () => {
         "Content-Type": "multipart/form-data",
       },
     });
-    // console.log(hostingImg)
+   
     if (hostingImg.data.success) {
       const productItem = {
         name: data.name,
@@ -65,7 +64,7 @@ const AddProduct = () => {
         image: hostingImg.data.data.display_url,
         description: data.description,
       };
-      console.log(productItem);
+     
 
       const postItem = await axiosSecure.post("/products", productItem);
       if (postItem) {

@@ -18,6 +18,9 @@ import UpdateProduct from "../pages/dashboard/admin/UpdateProduct";
 import PaymentSuccess from "../pages/shop/PaymentSuccess";
 import PaymentFailure from "../pages/shop/PaymentFailure";
 import PageNotFound from "../components/PageNotFound";
+import AddStore from "../pages/dashboard/admin/AddStore";
+import ManageStore from "../pages/dashboard/admin/ManageStore";
+import UpdateStore from "../pages/dashboard/admin/UpdateStore";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +81,8 @@ const router = createBrowserRouter([
         path: "users",
         element: <Users />,
       },
+
+      // Product Routes
       {
         path: "add-product",
         element: <AddProduct />,
@@ -90,7 +95,23 @@ const router = createBrowserRouter([
         path: "update-product/:id",
         element: <UpdateProduct />,
         loader: ({ params }) =>
-          fetch(`https://mega-mart-server.onrender.com/products/${params.id}`),
+          fetch(`${import.meta.env.VITE_API_URL}/products/${params.id}`),
+      },
+
+      // Store Routes
+      {
+        path: "add-store",
+        element: <AddStore />,
+      },
+      {
+        path: "manage-store",
+        element: <ManageStore />,
+      },
+      {
+        path: "update-store/:id",
+        element: <UpdateStore/>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/stores/${params.id}`),
       },
     ],
   },

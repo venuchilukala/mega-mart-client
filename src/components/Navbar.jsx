@@ -13,7 +13,6 @@ const Navbar = () => {
   const { user } = useAuth();
 
   const [cart, refetch] = useCart()
-  console.log("Cart items from nav",cart)
 
 
   useEffect(() => {

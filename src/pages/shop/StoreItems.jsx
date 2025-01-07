@@ -8,7 +8,6 @@ const StoreItems = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(8);
   const { id } = useParams();
-  console.log(" stoewaje",store);
 
   useEffect(() => {
     const fetchStoreAndProducts = async () => {
@@ -28,8 +27,6 @@ const StoreItems = () => {
         const productsData = await Promise.all(productPromises);
         setProducts(productsData);
 
-        console.log("Store Data:", storeData);
-        console.log("Products Data:", productsData);
       } catch (error) {
         console.error("Error fetching store or products:", error);
       }

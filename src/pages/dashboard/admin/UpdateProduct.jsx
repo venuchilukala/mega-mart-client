@@ -41,7 +41,7 @@ const UpdateProduct = () => {
         image: hostingImg.data.data.display_url,
         description: data.description,
       };
-      console.log(productItem);
+      
 
       const updatedItem = await axiosSecure.patch(
         `/products/${product._id}`,
@@ -63,7 +63,7 @@ const UpdateProduct = () => {
   return (
     <div className="w-full md:w-[870px] px-4 mx-auto">
       <h2 className="text-2xl font-semibold my-4">
-        Upload a New <span className="text-blue-500">Product</span>
+        Update a  <span className="text-blue-500">Product</span>
       </h2>
 
       {/* Form  */}

@@ -4,16 +4,19 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Cards from "../../components/Cards";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 
 const Toppicks = () => {
   const [products, setProducts] = useState([]);
   const slider = React.useRef(null);
 
+  const axiosPublic = useAxiosPublic()
+
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://mega-mart-server.onrender.com/products");
-      const data = await response.json();
+      const response = await axiosPublic("/products");
+      const data = await response.data;
       setProducts(data);
     };
     fetchData();
@@ -66,12 +69,14 @@ const Toppicks = () => {
           <button
             onClick={() => slider?.current?.slickPrev()}
             className="btn p-2 ml-5 rounded-full"
+            aria-label="Previous Slide"
           >
             <FaAngleLeft className="w-8 h-8 p-1" />
           </button>
           <button
             onClick={() => slider?.current?.slickNext()}
             className="btn p-2 ml-5 rounded-full bg-blue-600"
+            aria-label="Next Slide"
           >
             <FaAngleRight className="w-8 h-8 p-1 text-white" />
           </button>

@@ -104,6 +104,18 @@ const DashBoardLayout = () => {
                 </Link>
               </li>
               <li>
+                <Link to="/dashboard/add-store">
+                  <FaPlusCircle />
+                  Add Store
+                </Link>
+              </li>
+              <li>
+                <Link to="/dashboard/manage-store">
+                  <FaEdit />
+                  Manage Store
+                </Link>
+              </li>
+              <li>
                 <Link to="/dashboard/users" className="mb-3">
                   <FaUsers />
                   All Users

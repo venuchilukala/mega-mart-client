@@ -20,7 +20,7 @@ const UpdateProfile = () => {
   const onSubmit = (data) => {
     const name = data.name;
     const photoURL = data.photoURL;
-    console.log(name, photoURL)
+  
     updateUserProfile(name, photoURL).then(()=>{
       alert("Profile Updated successfully")
       navigate(from, {replace : true})

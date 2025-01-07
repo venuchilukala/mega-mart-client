@@ -4,60 +4,67 @@ import { FaHeart } from "react-icons/fa";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from "sweetalert2";
 import useCart from "../hooks/useCart";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Cards = (props) => {
   const { product } = props;
-  const { _id, name, price, discountPrice, isOnOffer, brand, stock, category, store, image, createdAt} = product;
+  const {
+    _id,
+    name,
+    price,
+    discountPrice,
+    isOnOffer,
+    brand,
+    stock,
+    category,
+    store,
+    image,
+    createdAt,
+  } = product;
 
-  const [cart, refetch] = useCart()
+  const [cart, refetch] = useCart();
+  const axiosSecure = useAxiosSecure();
 
   const [isFavourite, setFavourite] = useState(false);
   const { user } = useContext(AuthContext);
 
-  const location = useLocation()
-  const navigate = useNavigate()
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleFavouriteClick = () => {
     setFavourite(!isFavourite);
   };
 
-  // https://mega-mart-server.onrender.com/carts
-  // {
-  //   "productId": "6777e2411de6b0da106d1a37", 
-  //   "quantity": 1, 
-  //   "email": "raj@gmail.com"
-  // }
-  const handleAddToCart = (product) => {
-    console.log(product)
-    if (user && user?.email) {
+ 
+  const handleAddToCart = async () => {
+    if (user && user.email) {
       const cartItem = {
         productId: _id,
-        quantity : 1,
+        quantity: 1,
         email: user.email,
       };
 
-      console.log(cartItem)
-      fetch("https://mega-mart-server.onrender.com/carts", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(cartItem),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log("data isd", data)
-          if (data) {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Item added to the cart",
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          }
-          refetch()
+      try {
+        const res = await axiosSecure.post("/carts", cartItem);
+        if (res.data) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Item added to the cart",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch();
+        }
+      } catch (error) {
+        console.error("Error adding to cart:", error);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Failed to add item to the cart",
+          text: "Please try again later.",
         });
+      }
     } else {
       Swal.fire({
         title: "Please Login?",
@@ -69,7 +76,7 @@ const Cards = (props) => {
         confirmButtonText: "Signup Now!",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate('/signup', {state: {from : location}})
+          navigate("/signup", { state: { from: location } });
         }
       });
     }

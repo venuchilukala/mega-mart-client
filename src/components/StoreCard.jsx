@@ -3,7 +3,6 @@ import React from "react";
 const StoreCard = (props) => {
   const { store } = props;
   const {_id, name, location, category, products, bannerImage, iconImage, floor, contact, createdAt} = store
-  console.log(store)
   
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl xl:mx-16 xl:my-8 m-4">

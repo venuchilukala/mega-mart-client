@@ -42,7 +42,7 @@ const Dashboard = () => {
     },
   });
 
-  console.log(stats)
+ 
   // Sample data for the bar chart
   const barData = {
     labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],

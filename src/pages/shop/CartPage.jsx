@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import { loadStripe } from "@stripe/stripe-js";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const CartPage = () => {
   const [cart, refetch] = useCart();
@@ -13,19 +15,19 @@ const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
 
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   // Fetch product details
   useEffect(() => {
     const fetchProductDetails = async () => {
       const productDetails = await Promise.all(
         cart.products.map(async (item) => {
-          const res = await fetch(
-            `https://mega-mart-server.onrender.com/products/${item.product}`
-          );
-          const productData = await res.json();
+          const res = await axiosPublic.get(`/products/${item.product}`);
+          const productData = await res.data;
           return {
-            ...productData, // Add fetched product details
-            quantity: item.quantity, // Include quantity from the cart
+            ...productData,
+            quantity: item.quantity,
           };
         })
       );
@@ -37,36 +39,29 @@ const CartPage = () => {
     }
   }, [cart]);
 
+  // Calculate price
   const calculatePrice = (item) => {
     return item.price * item.quantity;
   };
 
+  // Calculate sub total
   const calculateSubTotal = cartItems.reduce(
     (total, item) => total + calculatePrice(item),
     0
   );
 
+  // calculate handle increase
   const handleIncrease = async (item) => {
     try {
-      // Send the updated quantity (positive for increase, negative for decrease)
       const updatedQty = {
         productId: item._id,
-        quantity: 1, // Increase by 1
+        quantity: 1,
         email: cart.email,
       };
 
-      console.log("Clicked prod", updatedQty);
+      const res = await axiosSecure.post(`/carts`, updatedQty);
 
-      // Send the request to update the quantity in the cart
-      const response = await fetch(`https://mega-mart-server.onrender.com/carts`, {
-        method: "POST", // or "PUT" depending on your approach
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
-        body: JSON.stringify(updatedQty),
-      });
-
-      if (!response.ok) {
+      if (res.status !== 200) {
         throw new Error("Failed to update quantity");
       }
 
@@ -77,8 +72,6 @@ const CartPage = () => {
           : cartItem
       );
       setCartItems(updatedCart);
-
-      // Optionally refetch the updated cart if needed
       refetch();
     } catch (error) {
       console.error("Error increasing item quantity:", error);
@@ -87,25 +80,15 @@ const CartPage = () => {
 
   const handleDecrease = async (item) => {
     try {
-      // Send the updated quantity (negative for decrease)
       const updatedQty = {
         productId: item._id,
-        quantity: -1, // Decrease by 1
+        quantity: -1,
         email: cart.email,
       };
 
-      console.log("Clicked prod to decrease", updatedQty);
+      const res = await axiosSecure.post(`/carts`, updatedQty);
 
-      // Send the request to update the quantity in the cart
-      const response = await fetch(`https://mega-mart-server.onrender.com/carts`, {
-        method: "POST", // or "PUT" depending on your approach
-        headers: {
-          "Content-Type": "application/json; charset=UTF-8",
-        },
-        body: JSON.stringify(updatedQty),
-      });
-
-      if (!response.ok) {
+      if (res.status !== 200) {
         throw new Error("Failed to decrease quantity");
       }
 
@@ -117,7 +100,6 @@ const CartPage = () => {
       );
       setCartItems(updatedCart);
 
-      // Optionally refetch the updated cart if needed
       refetch();
     } catch (error) {
       console.error("Error decreasing item quantity:", error);
@@ -126,7 +108,7 @@ const CartPage = () => {
 
   // delete a product
   const handleDelete = (item) => {
-    console.log(item);
+   
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -138,26 +120,20 @@ const CartPage = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const res = await fetch(
-            `https://mega-mart-server.onrender.com/carts/${item._id}?email=${user?.email}`,
-            {
-              method: "DELETE",
-            }
+          const res = await axiosPublic.delete(
+            `/carts/${item._id}?email=${user?.email}`
           );
 
-          const data = await res.json();
-          if (data.deletedCount > 0) {
-            const updatedCart = cartItems.filter(
-              (cartItem) => cartItem._id !== item._id
-            );
-            setCartItems(updatedCart);
-            refetch();
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your item has been removed.",
-              icon: "success",
-            });
-          }
+          const updatedCart = cartItems.filter(
+            (cartItem) => cartItem._id !== item._id
+          );
+          setCartItems(updatedCart);
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your item has been removed.",
+            icon: "success",
+          });
         } catch (error) {
           console.error("Error deleting item:", error);
         }
@@ -177,26 +153,16 @@ const CartPage = () => {
       const body = {
         products: cartItems,
       };
-      console.log(body);
-      const response = await fetch(
-        "https://mega-mart-server.onrender.com/create-checkout-session",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
+
+      const response = await axiosSecure.post("/create-checkout-session", body);
       if (response.status !== 200) {
         console.error("Failed to create checkout session", response.data);
         return;
       }
-      const data = await response.json();
+      const data = await response.data;
       const session_id = data.id;
 
       const result = await stripe.redirectToCheckout({ sessionId: session_id });
-      console.log(result);
       if (result.error) {
         console.error("Error redirecting to checkout:", result.error.message);
       } else {
@@ -204,15 +170,11 @@ const CartPage = () => {
         const paymentStatus = await waitForPaymentConfirmation(session_id);
         if (paymentStatus === "success") {
           // Clear the cart after successful payment
-          const clearCartResponse = await fetch(
-            `https://mega-mart-server.onrender.com/carts/clear-cart`,
-            {
-              method: "DELETE",
-            }
+          const clearCartResponse = await axiosPublic.delete(
+            `/carts/clear-cart`
           );
 
           if (clearCartResponse.status === 200) {
-            console.log("Cart cleared successfully after payment.");
             Swal.fire({
               icon: "success",
               title: "Payment Successful",
@@ -221,7 +183,7 @@ const CartPage = () => {
           } else {
             console.error(
               "Failed to clear the cart:",
-              await clearCartResponse.json()
+              await clearCartResponse.data
             );
           }
         } else {
