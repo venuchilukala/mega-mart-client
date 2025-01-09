@@ -13,6 +13,11 @@ header{
   z-index: 10001 !important;
 }
 
+.active{
+  text-decoration: underline;
+  color: rgb(96, 145, 204);
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

@@ -17,7 +17,8 @@ const Toppicks = () => {
     const fetchData = async () => {
       const response = await axiosPublic("/products");
       const data = await response.data;
-      setProducts(data);
+      const filteredData = data.filter(item => item.isOnOffer)
+      setProducts(filteredData);
     };
     fetchData();
   }, []);
@@ -40,7 +41,7 @@ const Toppicks = () => {
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -61,7 +62,7 @@ const Toppicks = () => {
     <div className="px-24 relative">
       <div className="">
         <div>
-          <p className="text-xl font-semibold py-2">Top picks</p>
+          <p className="text-5xl font-semibold my-4">Top picks</p>
           <p className="text-3xl font-bold py-2">Best Selling Products from different categories</p>
           
         </div>

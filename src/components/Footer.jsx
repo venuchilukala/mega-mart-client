@@ -13,24 +13,24 @@ const Footer = () => {
           </p>
         </aside>
         <nav>
-          <h6 className="footer-title">Services</h6>
-          <a className="link link-hover">Branding</a>
-          <a className="link link-hover">Design</a>
-          <a className="link link-hover">Marketing</a>
-          <a className="link link-hover">Advertisement</a>
+          <h6 className="footer-title uppercase">Services</h6>
+          <a className="link link-hover">Valet Parking</a>
+          <a className="link link-hover">Food Court</a>
+          <a className="link link-hover">ATM Services</a>
+          <a className="link link-hover">Free Wi-Fi</a>
         </nav>
         <nav>
-          <h6 className="footer-title">Company</h6>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
+          <h6 className="footer-title uppercase">Main</h6>
+          <a className="link link-hover" href="/">Home</a>
+          <a className="link link-hover" href="/store">Store</a>
           <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Press kit</a>
+          <a className="link link-hover">Visit</a>
         </nav>
         <nav>
-          <h6 className="footer-title">Legal</h6>
+          <h6 className="footer-title uppercase">Contact us</h6>
           <a className="link link-hover">Terms of use</a>
-          <a className="link link-hover">Privacy policy</a>
-          <a className="link link-hover">Cookie policy</a>
+          <a className="link link-hover">+91 6281 XXX XXX</a>
+          <a className="link link-hover">megamart@gmail.com</a>
         </nav>
       </footer>
       <footer className="footer bg-base-200 text-base-content items-center p-4">

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { MdDashboard, MdDashboardCustomize } from "react-icons/md";
 import {
   FaUsers,
@@ -42,6 +42,22 @@ const sharedLinks = (
 const DashBoardLayout = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
   const { loading } = useAuth();
+  const {logOut} = useAuth()
+
+  const location = useLocation()
+  const navigate = useNavigate()
+  const from = location.state?.from?.pathname || "/"
+
+
+  const handleLogout = () => {
+    logOut().then(()=>{
+      alert("Logout done successfully")
+      navigate(from , {replace : true})
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+
   return (
     <div>
       {isAdmin ? (
@@ -56,7 +72,7 @@ const DashBoardLayout = () => {
               >
                 <MdDashboardCustomize />
               </label>
-              <button className="btn btn-success rounded-full px-6 text-white lg:hidden flex items-center gap-2">
+              <button onClick={handleLogout} className="btn btn-success rounded-full px-6 text-white lg:hidden flex items-center gap-2">
                 <FaRegUser /> Logout
               </button>
             </div>

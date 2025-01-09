@@ -10,7 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
-import axios from 'axios'
+import axios from "axios";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -19,7 +19,6 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-
 
   // Create an account
   const createUser = (email, password) => {
@@ -38,6 +37,8 @@ const AuthProvider = ({ children }) => {
 
   // logout
   const logOut = () => {
+    setUser(null); // Clear user state immediately
+    localStorage.removeItem("jwt-token"); // Remove JWT immediately
     return signOut(auth);
   };
 
@@ -54,14 +55,16 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        const userInfo = {email : currentUser.email}
-        axios.post('https://mega-mart-server.onrender.com/jwt', userInfo).then((response)=> {
-          if(response.data.jwt_token){
-            localStorage.setItem("jwt-token", response.data.jwt_token)
-          }
-        })
-      }else{
-        localStorage.removeItem("jwt-token")
+        const userInfo = { email: currentUser.email };
+        axios
+          .post("https://mega-mart-server.onrender.com/jwt", userInfo)
+          .then((response) => {
+            if (response.data.jwt_token) {
+              localStorage.setItem("jwt-token", response.data.jwt_token);
+            }
+          });
+      } else {
+        localStorage.removeItem("jwt-token");
       }
       setLoading(false);
     });

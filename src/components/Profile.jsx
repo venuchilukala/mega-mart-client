@@ -55,6 +55,9 @@ const Profile = ({ user }) => {
               <a>Setting</a>
             </li>
             <li>
+              <Link to="/announcement">Announcement</Link>
+            </li>
+            <li>
               <Link to="/dashboard">Dashboard</Link>
             </li>
             <li>
