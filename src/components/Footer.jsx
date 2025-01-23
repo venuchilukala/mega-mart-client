@@ -28,9 +28,9 @@ const Footer = () => {
         </nav>
         <nav>
           <h6 className="footer-title uppercase">Contact us</h6>
-          <a className="link link-hover">Terms of use</a>
+          <a className="link link-hover">Mart Manager</a>
           <a className="link link-hover">+91 6281 XXX XXX</a>
-          <a className="link link-hover">megamart@gmail.com</a>
+          <a className="link link-hover">manager@megamart.com</a>
         </nav>
       </footer>
       <footer className="footer bg-base-200 text-base-content items-center p-4">

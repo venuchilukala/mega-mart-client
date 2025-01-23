@@ -14,7 +14,7 @@ const Store = () => {
   const [itemsPerPage] = useState(6);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const axiosPublic = useAxiosPublic()
+  const axiosPublic = useAxiosPublic();
 
   // Get all Stores
   useEffect(() => {
@@ -78,6 +78,13 @@ const Store = () => {
         break;
       case "Z-A":
         sortedItems.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+
+      case "floor-low-high":
+        sortedItems.sort((a, b) => a.floor - b.floor);
+        break;
+      case "floor-high-low":
+        sortedItems.sort((a, b) => b.floor - a.floor);
         break;
 
       default:
@@ -219,6 +226,8 @@ const Store = () => {
             <option value="default">Default</option>
             <option value="A-Z">A-Z</option>
             <option value="Z-A">Z-A</option>
+            <option value="floor-low-high">Floor: Low - High</option>
+            <option value="floor-high-low">Floor: High - Low</option>
           </select>
         </div>
       </div>
